@@ -1,6 +1,6 @@
 If you can see this locally, you have completed half the homework so far.
 If you like, you can go to 
-https://badgus-dev.allizom.org/en-US/
+https://badges-dev.allizom.org/en-US/
 to claim your badge for successfully checking out the github repository.
 
 You will have to set up a BrowserID account if you want to claim your badge.
