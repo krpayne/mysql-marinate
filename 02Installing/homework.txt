@@ -3,17 +3,86 @@ Homework for Chapter 2 of Learning MySQL (2006 edition), from p. 94:
 Exercises:
 1) What is command completion?
 
+Command completion allows you to enter the first few letters of a command at
+the command prompt and then displays the various commands that begin with
+those letters. This reduces the number of keystrokes entered.
+
 2) What are the relative advantages of installing MySQL using the package,
  directory archive (tarball or "no-install", or compiled methods?
 
+Using a package makes it very easy to install the software as long as you like
+the default configuration is sets up.
+
+Using a tarball allows the administrator to place the software in a desired
+location with a minimal amount of configuration effort.
+
+Compiling the source code is the ultimate in flexibility, permitting custom
+configurations. This is the most complex method of installing the software.
+
 3) How do you verify the integrity of downloaded packages?
 
+Compute the checksum of the package with the appropriate digest and compare
+that value to the value specified by the trusted supplier of the package.
+
 4) How do you add the MySQL bin directory to the operating system path?
+
+Add it to your PATH environmental variable. Implementing this is dependent on the OS and/or shell. For a user using the bash shell modify the .bashrc
+file located in your home directory. Change the /etc/profile file to enable it
+for all system userIDs. Use the following:
+
+export PATH=$PATH:/mysql_executable_bin_directory
 
 Additional Exercises (not in the book): 
 1) Document how you installed MySQL and any issues you came across with installation. 
  (The goal is to be easy to install it again on a similar machine.)
 
+I was unable to install a package on our RHEL 5 system. There was an existing
+MySQL version, 5.0. I was unable to do an upgrade because of dependencies. So
+I compiled from source.
+
+1. Under a non-root userID called dbamgr, I downloaded  mysql-5.6.10.tar.gz. Uncompressed 
+nd untared the file into a directory under my home directory.
+
+2. Used cmake for the first time:
+
+cmake . \
+-DCMAKE_INSTALL_PREFIX=/home/dbamgr/mysql56 \
+-DMYSQL_DATADIR=/usr/local/mysql/data \
+-DMYSQL_TCP_PORT=13306 \
+-DMYSQL_UNIX_ADDR=/home/dbamgr/mysql56/mysql.sock
+
+3. Completed the compile using "make" and then "make install". No problems.
+
+4. Ran the DB initialization script:
+
+scripts/mysql_install_db
+
+
+5. After many attempts came up with the follwing startup command:
+
+bin/mysqld_safe --log-error=/home/dbamgr/mysql56/logs/mysqld.log
+--datadir=/home/dbamgr/mysql56/data --socket=/home/dbamgr/mysql56/mysql.sock
+--pid-file=/home/dbamgr/mysql56/logs/mysqld.pid &
+
+I see that I did not specify the data directory properly with cmake.
+
+6. Ran mysqladmin with user root. Issued a couple of commands.
+
+bin/mysqladmin --user=root variables
+bin/mysqladmin --user=root shutdown
+
+Seems to have worked, I am not totally confident  that there is not going to
+be a conflict with the existing 5.0 version. I did not do the setup for
+automatic start upon reboot.
+
+
 2) Document where important files should be.
+
+mysqld_safe, mysqld, mysqladmin - Located in the bin directory
+mysqld.log - Configured it to reside in the logs directory I created.
+mysql.sock - Configured it to reside in the mysql root directory.
+mysqld.pid - Configured it to reside in the logs directory.
+DB files - Configured them to reside in the data directory.
+my.cnf - Located in the mysql root directory.
 
 Do not forget to do a pull request when your homework is complete.
