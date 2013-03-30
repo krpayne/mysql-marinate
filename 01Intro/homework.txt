@@ -15,4 +15,5 @@ Do not forget to finish this week's homework - edit this file and put the
 name you use on meetup.com into this file:
 Kevin Payne
 
-Do not forget to do a pull request when your homework is complete.
+Do not forget to do a pull request when your homework is complete. 
+http://www.meetup.com/Virtual-Tech-Self-Study/messages/boards/thread/29963152/
