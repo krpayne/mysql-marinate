@@ -1,12 +1,28 @@
 1. When would you use a weak entity?
 
+A weak entity is used when it is dependent on another entity. For example,
+there may be a product entity describing the product offering of a company.
+This is a strong entity as it can stand alone. You may also have an entity
+that contains the pricing history of a product. This is a weak entity since it
+cannot exist without having a product entity.
+
 
 2. Is it better to use entities instead of attributes?
+
+Neither is better than the other. Attributes are elements that belong to an
+entity. You cannot have one without the other. For example in the pricing
+history entity you would have a date attribute and a price attribute. It
+cannot be said that having a price date entity would be better. It could make
+it overly complicated. Making the price history entity an attribute of the
+product entity may create maintenance problems.
 
 
 3. Alter and extend the music database ER model so that it can store 
 compilations, where a compilation is an album that contains tracks by two 
 or more different artists.
+
+The diagram is in the jpg file. I chose to create a Compilation entity and
+then a many to many relationship between the Compilation and the Track entity.
 
 4. Create an ER diagram for an online media store using the following requirements:
  - There are two types of product: music CDs and video DVDs.
@@ -62,3 +78,8 @@ The .odg file was created on Open Office, but all compatibile programs can be se
 http://www.fileinfo.com/extension/odg
 
 Or you can just hand-draw diagrams for questions 3 and 4 and take a picture, as in the Diagram4_11.jpg file.
+
+
+
+The diagram is in the jpg file. Note that the jpg file contains 2 diagrams,
+one for excercise 3 and one for excercise 4. 
